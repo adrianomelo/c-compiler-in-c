@@ -9,6 +9,7 @@
 #ifndef AST_H
 #define AST_H
 
+// enum with the number identfifies for the ast nodes
 enum {type_program, type_statement_list, type_attribution, type_identifier, type_expression, type_number, type_operation, type_int, type_double, type_char};
 
 typedef struct program          program_t;
