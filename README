@@ -10,3 +10,5 @@ var b = 1001.45;
 var c = a + b * 5;
 
 The motivation for this project is support students of a compiler course at Federal University of Pernambuco (UFPE) in Brazil. url: www.cin.ufpe.br/~if688
+
+for more information you can mail me at astm AT cin.ufpe.br
