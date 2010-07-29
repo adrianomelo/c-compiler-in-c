@@ -1,4 +1,3 @@
-
 /**
  * Autor: Adriano Melo <astm@cin.ufpe.br>
  * Modificado por:
