@@ -29,10 +29,10 @@ MULTIPLICACAO   "*"
 
 ("\n"|";")  {return SEPARADOR;}
 
-"+"         {yylval.caracter = yytext[0]; return SOMA;}
-"-"         {yylval.caracter = yytext[0]; return SUBTRACAO;}
-"*"         {yylval.caracter = yytext[0]; return MULTIPLICACAO;}
-"/"         {yylval.caracter = yytext[0]; return DIVISAO;}
+"+"         {yylval.string = strdup(yytext); return SOMA;}
+"-"         {yylval.string = strdup(yytext); return SUBTRACAO;}
+"*"         {yylval.string = strdup(yytext); return MULTIPLICACAO;}
+"/"         {yylval.string = strdup(yytext); return DIVISAO;}
 
 {NUMERO}    {yylval.number = atof(yytext); return NUMERO;}
 {TIPO}      {yylval.string = strdup(yytext); return TIPO;}

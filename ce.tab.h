@@ -71,9 +71,10 @@ typedef union YYSTYPE
     int     number;
     char    caracter;
     char*   string;
+    ast_t*  ast;
 }
 /* Line 1529 of yacc.c.  */
-#line 77 "ce.tab.h"
+#line 78 "ce.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

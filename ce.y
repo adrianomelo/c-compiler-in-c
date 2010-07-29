@@ -1,6 +1,6 @@
 %{
 #include <stdio.h>
-
+#include "ast.h"
 #define YYERROR_VERBOSE
 
 void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
@@ -11,15 +11,16 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
     int     number;
     char    caracter;
     char*   string;
+    ast_t*  ast;
 }
 
 %start statementList
 
 %token SEPARADOR ATRIBUICAO
-%token <caracter> SOMA SUBTRACAO DIVISAO MULTIPLICACAO
+%token <string> SOMA SUBTRACAO DIVISAO MULTIPLICACAO
 %token <string> TIPO VARIAVEL 
 %token <number> NUMERO
-%type  <number> expressao termo fator
+%type <ast> expressao termo fator
 
 %%
 
@@ -33,32 +34,38 @@ statement:
 ;
 
 atribuicao:
-    TIPO VARIAVEL ATRIBUICAO expressao  {printf("tipo: %s, var: %s, exp: %d", $1, $2, $4);}
+    TIPO VARIAVEL ATRIBUICAO expressao  
+        {printf("tipo: %s, var: %s, exp:\n", $1, $2);}
 ;
 
 expressao:
     termo
 |   expressao SOMA termo 
-        {printf("expr: %d + %d = %d\n", $1, $3, $1 + $3); $$ = $1 + $3;}
 |   expressao SUBTRACAO termo 
-        {printf("expr: %d - %d = %d\n", $1, $3, $1 - $3); $$ = $1 - $3;}
+        {
+         printf(" exp +/- exp \n"); 
+         $$ = (ast_t*) new_expression ($1, (ast_t*) new_operation($2), $3);
+        }
 ;
 
 termo:
     fator
 |   termo MULTIPLICACAO fator 
-        {printf("term: %d * %d = %d\n", $1, $3, $1 * $3); $$ = $1 * $3;}
 |   fator DIVISAO fator 
-        {printf("term: %d / %d = %d\n", $1, $3, $1 / $3); $$ = $1 / $3;}
+        {
+         printf("termo/fator *// fator \n"); 
+         $$ = (ast_t*) new_expression ($1, (ast_t*) new_operation($2), $3);
+        }
 ;
 
 fator:
-    NUMERO          {printf("fator: %d \n", $1); $$ = $1;}
+    NUMERO
+        {printf("fator: %d \n", $1); $$ = (ast_t*) new_number($1);}
 ;
 
 %%
-main(int argc, char* argv[])
+/*main(int argc, char* argv[])
 {
     while(1)
         yyparse();
-}
+}*/
