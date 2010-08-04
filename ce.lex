@@ -1,6 +1,7 @@
 %option noyywrap
 %{
-    #include "ce.tab.h"
+#include "ast.h"
+#include "ce.tab.h"
 %}
 
 NUMERO      [0-9]*

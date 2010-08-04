@@ -8,5 +8,6 @@ all: bisonflex
 
 bisonflex: ce.y ce.lex
 	$(BISON) -d ce.y
-	$(FLEX) ce.lex
+	$(FLEX) --header-file=ce.lex.h  ce.lex
+
 

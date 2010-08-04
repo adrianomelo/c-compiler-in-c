@@ -472,8 +472,9 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "ce.lex"
 #line 3 "ce.lex"
-    #include "ce.tab.h"
-#line 477 "lex.yy.c"
+#include "ast.h"
+#include "ce.tab.h"
+#line 478 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -655,10 +656,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 28 "ce.lex"
+#line 29 "ce.lex"
 
 
-#line 662 "lex.yy.c"
+#line 663 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -744,55 +745,55 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 30 "ce.lex"
+#line 31 "ce.lex"
 {return SEPARADOR;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 32 "ce.lex"
+#line 33 "ce.lex"
 {yylval.string = strdup(yytext); return SOMA;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 33 "ce.lex"
+#line 34 "ce.lex"
 {yylval.string = strdup(yytext); return SUBTRACAO;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 34 "ce.lex"
+#line 35 "ce.lex"
 {yylval.string = strdup(yytext); return MULTIPLICACAO;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 35 "ce.lex"
+#line 36 "ce.lex"
 {yylval.string = strdup(yytext); return DIVISAO;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 37 "ce.lex"
+#line 38 "ce.lex"
 {yylval.number = atof(yytext); return NUMERO;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 38 "ce.lex"
+#line 39 "ce.lex"
 {yylval.string = strdup(yytext); return TIPO;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 40 "ce.lex"
+#line 41 "ce.lex"
 {yylval.string = strdup(yytext); return VARIAVEL;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 42 "ce.lex"
+#line 43 "ce.lex"
 {yylval.caracter = yytext[0]; return ATRIBUICAO;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 44 "ce.lex"
+#line 45 "ce.lex"
 ECHO;
 	YY_BREAK
-#line 796 "lex.yy.c"
+#line 797 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1790,7 +1791,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 44 "ce.lex"
+#line 45 "ce.lex"
 
 
 
