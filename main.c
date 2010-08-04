@@ -3,7 +3,7 @@
 
 int main (int argc, char* argv[])
 {
-    root = new_program();
+    root = (ast_t*) new_program();
 
     while(1)
         yyparse();

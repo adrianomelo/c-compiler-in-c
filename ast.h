@@ -22,7 +22,7 @@ typedef struct operation        operation_t;
 
 typedef struct ast_node         ast_t;
 
-program_t* root;
+ast_t* root;
 
 struct ast_node {
     int node_type;
