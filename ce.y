@@ -24,7 +24,10 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
 %%
 
 program:
-    statementList       {root = (ast_t*) new_program();}
+    statementList
+    {
+        root = (ast_t*) new_program();
+    }
 ;
 
 statementList:
