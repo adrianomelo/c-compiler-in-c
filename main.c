@@ -1,5 +1,5 @@
-#include "ce.tab.h"
 #include "ast.h"
+#include "ce.tab.h"
 
 int main (int argc, char* argv[])
 {

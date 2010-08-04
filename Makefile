@@ -10,4 +10,5 @@ bisonflex: ce.y ce.lex
 	$(BISON) -d ce.y
 	$(FLEX) --header-file=ce.lex.h  ce.lex
 
-
+clean:
+	rm ce.*.*
