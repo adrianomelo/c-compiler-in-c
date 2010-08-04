@@ -66,12 +66,12 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 10 "ce.y"
+#line 9 "ce.y"
 {
     int     number;
     char    caracter;
     char*   string;
-    ast_t*  ast;
+    ast_t*  tree;
 }
 /* Line 1529 of yacc.c.  */
 #line 78 "ce.tab.h"

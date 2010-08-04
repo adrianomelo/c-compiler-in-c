@@ -96,10 +96,9 @@
 
 #include <stdio.h>
 #include "ast.h"
+
 #define YYERROR_VERBOSE
-
 void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
-
 
 
 /* Enabling traces.  */
@@ -122,15 +121,15 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 10 "ce.y"
+#line 9 "ce.y"
 {
     int     number;
     char    caracter;
     char*   string;
-    ast_t*  ast;
+    ast_t*  tree;
 }
 /* Line 193 of yacc.c.  */
-#line 134 "ce.tab.c"
+#line 133 "ce.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -143,7 +142,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 147 "ce.tab.c"
+#line 146 "ce.tab.c"
 
 #ifdef short
 # undef short
@@ -429,8 +428,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    28,    28,    29,    32,    33,    37,    42,    43,    44,
-      52,    53,    54,    62
+       0,    27,    27,    28,    31,    32,    36,    41,    42,    43,
+      51,    52,    53,    61
 };
 #endif
 
@@ -1340,34 +1339,34 @@ yyreduce:
   switch (yyn)
     {
         case 6:
-#line 38 "ce.y"
+#line 37 "ce.y"
     {printf("tipo: %s, var: %s, exp:\n", (yyvsp[(1) - (4)].string), (yyvsp[(2) - (4)].string));;}
     break;
 
   case 9:
-#line 45 "ce.y"
+#line 44 "ce.y"
     {
          printf(" exp +/- exp \n"); 
-         (yyval.ast) = (ast_t*) new_expression ((yyvsp[(1) - (3)].ast), (ast_t*) new_operation((yyvsp[(2) - (3)].string)), (yyvsp[(3) - (3)].ast));
+         (yyval.tree) = (ast_t*) new_expression ((yyvsp[(1) - (3)].tree), (ast_t*) new_operation((yyvsp[(2) - (3)].string)), (yyvsp[(3) - (3)].tree));
         ;}
     break;
 
   case 12:
-#line 55 "ce.y"
+#line 54 "ce.y"
     {
          printf("termo/fator *// fator \n"); 
-         (yyval.ast) = (ast_t*) new_expression ((yyvsp[(1) - (3)].ast), (ast_t*) new_operation((yyvsp[(2) - (3)].string)), (yyvsp[(3) - (3)].ast));
+         (yyval.tree) = (ast_t*) new_expression ((yyvsp[(1) - (3)].tree), (ast_t*) new_operation((yyvsp[(2) - (3)].string)), (yyvsp[(3) - (3)].tree));
         ;}
     break;
 
   case 13:
-#line 63 "ce.y"
-    {printf("fator: %d \n", (yyvsp[(1) - (1)].number)); (yyval.ast) = (ast_t*) new_number((yyvsp[(1) - (1)].number));;}
+#line 62 "ce.y"
+    {printf("fator: %d \n", (yyvsp[(1) - (1)].number)); (yyval.tree) = (ast_t*) new_number((yyvsp[(1) - (1)].number));;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1371 "ce.tab.c"
+#line 1370 "ce.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1581,7 +1580,7 @@ yyreturn:
 }
 
 
-#line 66 "ce.y"
+#line 65 "ce.y"
 
 /*main(int argc, char* argv[])
 {

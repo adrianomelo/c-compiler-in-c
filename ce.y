@@ -1,17 +1,16 @@
 %{
 #include <stdio.h>
 #include "ast.h"
+
 #define YYERROR_VERBOSE
-
 void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
-
 %}
 
 %union {
     int     number;
     char    caracter;
     char*   string;
-    ast_t*  ast;
+    ast_t*  tree;
 }
 
 %start statementList
@@ -20,7 +19,7 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
 %token <string> SOMA SUBTRACAO DIVISAO MULTIPLICACAO
 %token <string> TIPO VARIAVEL 
 %token <number> NUMERO
-%type <ast> expressao termo fator
+%type <tree> expressao termo fator
 
 %%
 
