@@ -1,3 +1,4 @@
+# duvidas: Adriano Melo <astm@cin.ufpe.br>
 
 GCC = gcc
 FLEX = flex
