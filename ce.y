@@ -13,7 +13,7 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
     ast_t*  tree;
 }
 
-%start program
+%start statementList
 
 %token SEPARADOR ATRIBUICAO
 %token <string> SOMA SUBTRACAO DIVISAO MULTIPLICACAO
@@ -23,17 +23,14 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
 
 %%
 
-program:
-    statementList
-    {
-        root = (ast_t*) new_program();
-    }
-;
-
 statementList:
-    statement
-|   statement SEPARADOR statementList
+    statementList SEPARADOR statement
+    {
+        printf("statementList");
+    }
+|   statement
     { 
+        printf("statement");
         statement_list_t* stmt = new_statement_list ($1);
         add_statement ((program_t*) root, stmt);
     }
@@ -86,6 +83,11 @@ fator:
     {
         printf("fator: %d \n", $1); 
         $$ = (ast_t*) new_number($1);
+    }
+|   VARIAVEL
+    {
+        printf("fator: %s \n", $1);
+        $$ = (ast_t*) new_identifier($1);
     }
 ;
 
