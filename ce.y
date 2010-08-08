@@ -19,7 +19,7 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
 %token <string> SOMA SUBTRACAO DIVISAO MULTIPLICACAO
 %token <string> TIPO VARIAVEL 
 %token <number> NUMERO
-%type <tree> expressao termo fator atribuicao statement
+%type <tree> expressao termo fator attribution statement
 
 %%
 
@@ -34,29 +34,30 @@ function:
 statementList:
     statementList statement
     {
-        printf("statementList\n");
+        printf("[ce.y] statementList\n");
         statement_list_t* stmt = new_statement_list ($2);
         add_statement ((program_t*) root, stmt);
     }
 |   statement
     { 
-        printf("statement\n");
+        printf("[ce.y] statement\n");
         statement_list_t* stmt = new_statement_list ($1);
         add_statement ((program_t*) root, stmt);
     }
 ;
 
 statement:
-    atribuicao SEPARADOR
+    attribution SEPARADOR
     {
+        printf("[ce.y] statement attribution\n");
         $$ = $1;
     }
 ;
 
-atribuicao:
+attribution:
     TIPO VARIAVEL ATRIBUICAO expressao  
     {
-        printf("tipo: %s, var: %s, exp:\n", $1, $2);
+        printf("[ce.y] attribution. tipo: %s, var: %s\n", $1, $2);
         identifier_t* id = new_identifier($2);
         $$ = (ast_t*) new_attribution (id, $4);
     }
@@ -65,12 +66,13 @@ atribuicao:
 expressao:
     termo
     {
+        printf("[ce.y] termo\n");
         $$ = $1;
     }
 |   expressao SOMA termo 
 |   expressao SUBTRACAO termo 
     {
-        printf(" exp +/- exp \n"); 
+        printf("[ce.y] expressao som termo \n"); 
         $$ = (ast_t*) new_expression ($1, (ast_t*) new_operation($2), $3);
     }
 ;
@@ -78,12 +80,13 @@ expressao:
 termo:
     fator
     {
+        printf("[ce.y] fator\n"); 
         $$ = $1;
     }
 |   termo MULTIPLICACAO fator 
 |   fator DIVISAO fator 
     {
-        printf("termo/fator *// fator \n"); 
+        printf("[ce.y] fator div fator \n"); 
         $$ = (ast_t*) new_expression ($1, (ast_t*) new_operation($2), $3);
     }
 ;
@@ -91,12 +94,12 @@ termo:
 fator:
     NUMERO
     {
-        printf("fator: %d \n", $1); 
+        printf("[ce.y] number: %d \n", $1); 
         $$ = (ast_t*) new_number($1);
     }
 |   VARIAVEL
     {
-        printf("fator: %s \n", $1);
+        printf("[ce.y] identifier: %s \n", $1);
         $$ = (ast_t*) new_identifier($1);
     }
 ;

@@ -28,7 +28,7 @@ program_t* new_program()
  */
 void add_statement(program_t* program, statement_list_t* stmt)
 {
-    printf("[add_statement] statement adicionado");
+    printf("[add_statement] statement adicionado\n");
     if (program->head == 0){
         program->head = stmt;
         program->tail = stmt;
