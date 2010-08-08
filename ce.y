@@ -13,9 +13,9 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
     ast_t*  tree;
 }
 
-%start statementList
+%start program
 
-%token SEPARADOR ATRIBUICAO
+%token SEPARADOR ATRIBUICAO L_PAREN R_PAREN L_COLCH R_COLCH
 %token <string> SOMA SUBTRACAO DIVISAO MULTIPLICACAO
 %token <string> TIPO VARIAVEL 
 %token <number> NUMERO
@@ -23,21 +23,31 @@ void yyerror(const char *msg){printf("ERROR(PARSER): %s\n", msg);}
 
 %%
 
+program:
+    function
+;
+
+function:
+    TIPO VARIAVEL L_PAREN R_PAREN L_COLCH statementList R_COLCH
+;
+
 statementList:
-    statementList SEPARADOR statement
+    statementList statement
     {
-        printf("statementList");
+        printf("statementList\n");
+        statement_list_t* stmt = new_statement_list ($2);
+        add_statement ((program_t*) root, stmt);
     }
 |   statement
     { 
-        printf("statement");
+        printf("statement\n");
         statement_list_t* stmt = new_statement_list ($1);
         add_statement ((program_t*) root, stmt);
     }
 ;
 
 statement:
-    atribuicao
+    atribuicao SEPARADOR
     {
         $$ = $1;
     }

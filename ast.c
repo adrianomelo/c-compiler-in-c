@@ -5,7 +5,7 @@
  *
  * ast.c : implementa as funções necessárias para criação da AST.
  **/
-
+#include <stdio.h>
 #include <stdlib.h>
 #include "ast.h"
 
@@ -28,6 +28,7 @@ program_t* new_program()
  */
 void add_statement(program_t* program, statement_list_t* stmt)
 {
+    printf("[add_statement] statement adicionado");
     if (program->head == 0){
         program->head = stmt;
         program->tail = stmt;

@@ -1,4 +1,3 @@
-# duvidas: Adriano Melo <astm@cin.ufpe.br>
 
 GCC = gcc
 FLEX = flex
@@ -13,3 +12,6 @@ bisonflex: ce.y ce.lex
 
 clean:
 	rm ce.*.* lex.yy.c
+
+test:
+	bin/exec_main tests/integer.c

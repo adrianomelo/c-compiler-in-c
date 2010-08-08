@@ -9,6 +9,7 @@ LETRA       [A-Za-z_]
 VARIAVEL    [A-z_][0-9A-z_]*
 
 SEPARADOR   [ \t]+
+NL          ("\n"|"\r"|"\t")*
 
 TIPO        (int|char|long|void|short)
 
@@ -28,7 +29,12 @@ MULTIPLICACAO   "*"
 
 %%
 
-("\n"|";")  {return SEPARADOR;}
+{NL}";"{NL} {return SEPARADOR;}
+
+"("         {return L_PAREN;}
+")"         {return R_PAREN;}
+"{"         {return L_COLCH;}
+"}"         {return R_COLCH;}
 
 "+"         {yylval.string = strdup(yytext); return SOMA;}
 "-"         {yylval.string = strdup(yytext); return SUBTRACAO;}
