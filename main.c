@@ -7,6 +7,8 @@ extern FILE* yyin;
 
 int main (int argc, char* argv[])
 {
+    root = (ast_t*) new_program();
+
     if(argc > 1 && !strcmp(argv[1], "-d")) {
         //yydebug = 1; 
         argc--; 
