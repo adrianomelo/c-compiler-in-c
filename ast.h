@@ -22,6 +22,7 @@ typedef struct operation        operation_t;
 
 typedef struct ast_node         ast_t;
 
+/* node used for creating ast tree */
 ast_t* root;
 
 struct ast_node {
