@@ -17,5 +17,7 @@ int main (int argc, char* argv[]) {
     printf("0 = %d\n", add_symbol("b", type_double));   // ERRO: Já declarada
 
     printf("1 = %d\n", is_type("a", type_int));
+
+    printf("1 = %d\n", is_type("b", type_int));
 }
 
