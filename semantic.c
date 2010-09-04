@@ -51,20 +51,21 @@ void* s_visit_attribution (attribution_t* att, ... )
 
 void* s_visit_identifier (identifier_t* id, ... )
 {
-    printf("[semantic]    Visitando identifier\n");
+    printf("[semantic]    Visitando identifier %s\n", id->identifier);
 }
 
 void* s_visit_expression (expression_t* exp, ... )
 {
-    printf("[semantic]    Visitando expression\n");
+    operation_t* op = (operation_t*) exp->operation;
+    printf("[semantic]    Visitando expression %s\n", op->operation);
 
-    switch_expression (exp->left);
     switch_expression (exp->right); 
+    switch_expression (exp->left);
 }
 
 void* s_visit_number (number_t* num, ... )
 {
-    printf("[semantic]    Visitando number\n");
+    printf("[semantic]    Visitando number %f\n", num->value);
 }
 
 

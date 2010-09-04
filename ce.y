@@ -34,13 +34,13 @@ function:
 statementList:
     statementList statement
     {
-        printf("[ce.y] statementList\n");
+        //printf("[ce.y] statementList\n");
         statement_list_t* stmt = new_statement_list ($2);
         add_statement ((program_t*) root, stmt);
     }
 |   statement
     { 
-        printf("[ce.y] statement\n");
+        //printf("[ce.y] statement\n");
         statement_list_t* stmt = new_statement_list ($1);
         add_statement ((program_t*) root, stmt);
     }
@@ -49,7 +49,7 @@ statementList:
 statement:
     attribution SEPARADOR
     {
-        printf("[ce.y] statement attribution\n");
+        //printf("[ce.y] statement attribution\n");
         $$ = $1;
     }
 ;
@@ -57,7 +57,7 @@ statement:
 attribution:
     TIPO VARIAVEL ATRIBUICAO expressao  
     {
-        printf("[ce.y] attribution. tipo: %s, var: %s\n", $1, $2);
+        //printf("[ce.y] attribution. tipo: %s, var: %s\n", $1, $2);
         identifier_t* id = new_identifier($2);
         $$ = (ast_t*) new_attribution (id, $4);
     }
@@ -66,13 +66,17 @@ attribution:
 expressao:
     termo
     {
-        printf("[ce.y] termo\n");
+        //printf("[ce.y] termo\n");
         $$ = $1;
     }
 |   expressao SOMA termo 
+    {
+        //printf("[ce.y] expressao som termo \n"); 
+        $$ = (ast_t*) new_expression ($1, (ast_t*) new_operation($2), $3);
+    }
 |   expressao SUBTRACAO termo 
     {
-        printf("[ce.y] expressao som termo \n"); 
+        //printf("[ce.y] expressao som termo \n"); 
         $$ = (ast_t*) new_expression ($1, (ast_t*) new_operation($2), $3);
     }
 ;
@@ -80,13 +84,17 @@ expressao:
 termo:
     fator
     {
-        printf("[ce.y] fator\n"); 
+        //printf("[ce.y] fator\n"); 
         $$ = $1;
     }
 |   termo MULTIPLICACAO fator 
-|   fator DIVISAO fator 
     {
-        printf("[ce.y] fator div fator \n"); 
+        //printf("[ce.y] fator div fator \n"); 
+        $$ = (ast_t*) new_expression ($1, (ast_t*) new_operation($2), $3);
+    }
+|   termo DIVISAO fator 
+    {
+        //printf("[ce.y] fator div fator \n"); 
         $$ = (ast_t*) new_expression ($1, (ast_t*) new_operation($2), $3);
     }
 ;
@@ -94,12 +102,12 @@ termo:
 fator:
     NUMERO
     {
-        printf("[ce.y] number: %d \n", $1); 
+        //printf("[ce.y] number: %d \n", $1); 
         $$ = (ast_t*) new_number($1);
     }
 |   VARIAVEL
     {
-        printf("[ce.y] identifier: %s \n", $1);
+        //printf("[ce.y] identifier: %s \n", $1);
         $$ = (ast_t*) new_identifier($1);
     }
 ;
